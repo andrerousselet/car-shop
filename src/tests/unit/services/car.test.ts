@@ -6,19 +6,20 @@ import { carMock, carMockWithId, wrongCarMock } from '../../mocks/carMocks';
 import { ZodError } from 'zod';
 const { expect } = chai;
 
-describe('Car Service', () => {
+describe('Car Service - \'/cars\'', () => {
   const carModel = new CarModel();
   const carService = new CarService(carModel);
 
   before(async () => {
     sinon.stub(carModel, 'create').resolves(carMockWithId);
+    sinon.stub(carModel, 'read').resolves([carMockWithId]);
   });
 
   after(()=>{
     sinon.restore();
   })
 
-  describe('POST \'/cars\' - Create car', () => {
+  describe('Creating a car', () => {
     it('Success', async () => {
       const createdCar = await carService.create(carMock);
       expect(createdCar).to.deep.equal(carMockWithId);
@@ -45,6 +46,13 @@ describe('Car Service', () => {
       expect(error).not.to.be.undefined;
       expect(error).to.be.instanceOf(ZodError);
     })
+  });
+
+  describe('Listing all cars', () => {
+    it('Success', async () => {
+      const carList = await carService.read();
+      expect(carList).to.deep.equal([carMockWithId]);
+    });
   });
 
 });

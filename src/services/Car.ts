@@ -1,3 +1,4 @@
+import { ErrorTypes } from '../errors/customError';
 import { carZodSchema, ICar } from '../interfaces/ICar';
 import { IModel } from '../interfaces/IModel';
 import { IService } from '../interfaces/IService';
@@ -17,6 +18,12 @@ class CarService implements IService<ICar> {
 
   public async read(): Promise<ICar[]> {
     return this._carModel.read();
+  }
+
+  public async readOne(_id: string): Promise<ICar | null> {
+    const foundCar = await this._carModel.readOne(_id);
+    if (!foundCar) throw new Error(ErrorTypes.NotFound);
+    return foundCar;
   }
 }
 

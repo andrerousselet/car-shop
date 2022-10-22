@@ -4,11 +4,7 @@ import { IService } from '../interfaces/IService';
 import { vehicleZodSchema } from '../interfaces/IVehicle';
 
 class CarService implements IService<ICar> {
-  private _carModel: IModel<ICar>;
-
-  constructor(model: IModel<ICar>) {
-    this._carModel = model;
-  }
+  constructor(private _carModel: IModel<ICar>) {}
 
   public async create(obj: unknown): Promise<ICar> {
     const parsedVehicle = vehicleZodSchema.safeParse(obj);

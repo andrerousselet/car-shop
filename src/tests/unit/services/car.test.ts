@@ -13,6 +13,9 @@ describe('Car Service - \'/cars\'', () => {
   before(async () => {
     sinon.stub(carModel, 'create').resolves(carMockWithId);
     sinon.stub(carModel, 'read').resolves([carMockWithId]);
+    sinon.stub(carModel, 'readOne')
+      .onCall(0).resolves(carMockWithId)
+      .onCall(1).resolves(null);
   });
 
   after(()=>{
@@ -52,6 +55,24 @@ describe('Car Service - \'/cars\'', () => {
     it('Success', async () => {
       const carList = await carService.read();
       expect(carList).to.deep.equal([carMockWithId]);
+    });
+  });
+
+  describe('Searching one car', () => {
+    it('Success', async () => {
+      const foundCar = await carService.readOne(carMockWithId._id);
+      expect(foundCar).to.deep.equal(carMockWithId);
+    });
+
+    it('Failure - not found', async () => {
+      let error: any;
+      try {
+        await carService.readOne('inexisting_id');
+      } catch (err: any) {
+        error = err;
+      }      
+      expect(error).not.to.be.undefined;
+      expect(error.message).to.equal('NotFound');
     });
   });
 

@@ -1,11 +1,12 @@
 import { z } from 'zod';
-import { IVehicle } from './IVehicle';
+import { vehicleZodSchema } from './IVehicle';
 
-const carZodSchema = z.object({
+// https://github.com/colinhacks/zod#extend
+const carZodSchema = vehicleZodSchema.extend({
   doorsQty: z.number().min(2).max(4),
   seatsQty: z.number().min(2).max(7),
 });
 
-export type ICar = IVehicle & z.infer<typeof carZodSchema>;
+export type ICar = z.infer<typeof carZodSchema>;
 
 export { carZodSchema };

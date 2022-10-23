@@ -9,6 +9,7 @@ export enum StatusCodes {
 export enum ErrorTypes {
   NotFound = 'NotFound',
   InvalidId = 'InvalidId',
+  EmptyObject = 'EmptyObject',
 }
 
 type ErrorResponseObject = { 
@@ -27,6 +28,10 @@ export const customError: CustomError = {
   },
   InvalidId: {
     message: 'Id must have 24 hexadecimal characters',
+    httpStatus: StatusCodes.BAD_REQUEST,
+  },
+  EmptyObject: {
+    message: 'EmptyObject',
     httpStatus: StatusCodes.BAD_REQUEST,
   },
 };

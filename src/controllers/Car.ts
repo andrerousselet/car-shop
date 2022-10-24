@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { StatusCodes } from '../errors/customError';
 import { ICar } from '../interfaces/ICar';
 import { IService } from '../interfaces/IService';
 
@@ -23,6 +24,11 @@ class CarController {
   public async update(req: Request, res: Response<ICar | null>) {
     const updatedCar = await this._carService.update(req.params.id, req.body);
     return res.status(200).json(updatedCar);
+  }
+
+  public async delete(req: Request, res: Response<ICar | null>) {
+    await this._carService.delete(req.params.id);
+    return res.status(StatusCodes.NO_CONTENT).end();
   }
 }
 

@@ -37,9 +37,11 @@ export const newCarInfo: Partial<ICar> = {
   doorsQty: 4,
 }
 
-export const wrongCarMock: IVehicle = {
-  model: 'Ferrari Maranello',
-  year: 1963,
-  color: 'red',
+export const wrongCarMock: ICar = {
+  model: 'Fe',
+  year: 1850,
+  color: 're',
   buyValue: 3500000,
+  seatsQty: 7,
+  doorsQty: 10,
 }

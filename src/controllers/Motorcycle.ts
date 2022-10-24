@@ -7,23 +7,23 @@ class MotorcycleController {
   constructor(private _carService: IService<IMotorcycle>) {}
 
   public async create(req: Request, res: Response<IMotorcycle>) {
-    const createdCar = await this._carService.create(req.body);
-    return res.status(StatusCodes.CREATED).json(createdCar);
+    const createdMotorcycle = await this._carService.create(req.body);
+    return res.status(StatusCodes.CREATED).json(createdMotorcycle);
   }
 
   public async read(_req: Request, res: Response<IMotorcycle[]>) {
-    const carList = await this._carService.read();
-    return res.status(StatusCodes.OK).json(carList);
+    const motorcycleList = await this._carService.read();
+    return res.status(StatusCodes.OK).json(motorcycleList);
   }
 
   public async readOne(req: Request, res: Response<IMotorcycle | null>) {
-    const foundCar = await this._carService.readOne(req.params.id);
-    return res.status(StatusCodes.OK).json(foundCar);
+    const foundMotorcycle = await this._carService.readOne(req.params.id);
+    return res.status(StatusCodes.OK).json(foundMotorcycle);
   }
 
   public async update(req: Request, res: Response<IMotorcycle | null>) {
-    const updatedCar = await this._carService.update(req.params.id, req.body);
-    return res.status(StatusCodes.OK).json(updatedCar);
+    const updatedMotorcycle = await this._carService.update(req.params.id, req.body);
+    return res.status(StatusCodes.OK).json(updatedMotorcycle);
   }
 
   public async delete(req: Request, res: Response<IMotorcycle | null>) {

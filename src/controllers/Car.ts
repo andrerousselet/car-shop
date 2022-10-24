@@ -8,22 +8,22 @@ class CarController {
 
   public async create(req: Request, res: Response<ICar>) {
     const createdCar = await this._carService.create(req.body);
-    return res.status(201).json(createdCar);
+    return res.status(StatusCodes.CREATED).json(createdCar);
   }
 
   public async read(_req: Request, res: Response<ICar[]>) {
     const carList = await this._carService.read();
-    return res.status(200).json(carList);
+    return res.status(StatusCodes.OK).json(carList);
   }
 
   public async readOne(req: Request, res: Response<ICar | null>) {
     const foundCar = await this._carService.readOne(req.params.id);
-    return res.status(200).json(foundCar);
+    return res.status(StatusCodes.OK).json(foundCar);
   }
 
   public async update(req: Request, res: Response<ICar | null>) {
     const updatedCar = await this._carService.update(req.params.id, req.body);
-    return res.status(200).json(updatedCar);
+    return res.status(StatusCodes.OK).json(updatedCar);
   }
 
   public async delete(req: Request, res: Response<ICar | null>) {

@@ -7,7 +7,7 @@ import MotorcycleController from '../../../controllers/Motorcycle';
 import { motorcycleMock, motorcycleMockWithId, updatedMotorcycleMockWithId } from '../../mocks/motorcycleMocks';
 const { expect } = chai;
 
-describe('Car Controller - \'/cars\'', () => {
+describe('Motorcycle Controller - \'/motorcycles\'', () => {
   const motorcycleModel = new MotorcycleModel();
   const motorcycleService = new MotorcycleService(motorcycleModel);
   const motorcycleController = new MotorcycleController(motorcycleService);
@@ -29,7 +29,7 @@ describe('Car Controller - \'/cars\'', () => {
     sinon.restore();
   })
 
-  describe('Creating a car', () => {
+  describe('Creating a motorcycle', () => {
     it('Success', async () => {
       req.body = motorcycleMock;
       await motorcycleController.create(req, res);
@@ -38,7 +38,7 @@ describe('Car Controller - \'/cars\'', () => {
     });
   });
 
-  describe('Listing all cars', () => {
+  describe('Listing all motorcycles', () => {
     it('Success', async () => {
       await motorcycleController.read(req, res);
       expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
@@ -46,7 +46,7 @@ describe('Car Controller - \'/cars\'', () => {
     });
   });
 
-  describe('Searching one car', () => {
+  describe('Searching one motorcycle', () => {
     it('Success', async () => {
       req.params = { id: motorcycleMockWithId._id };
       await motorcycleController.readOne(req, res);
@@ -55,7 +55,7 @@ describe('Car Controller - \'/cars\'', () => {
     });
   });
 
-  describe('Updating a car', () => {
+  describe('Updating a motorcycle', () => {
     it('Success', async () => {
       req.params = { id: motorcycleMockWithId._id };
       await motorcycleController.update(req, res);
@@ -64,7 +64,7 @@ describe('Car Controller - \'/cars\'', () => {
     });
   });
 
-  describe('Deleting a car', () => {
+  describe('Deleting a motorcycle', () => {
     it('Success', async () => {
       sinon.reset();
       res.status = sinon.stub().returns(res);

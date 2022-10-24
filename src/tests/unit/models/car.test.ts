@@ -3,7 +3,6 @@ import chai from 'chai';
 import CarModel from '../../../models/Car';
 import { Model } from 'mongoose';
 import { carMock, carMockWithId, newCarInfo, updatedCarMockWithId } from '../../mocks/carMocks';
-import { ErrorTypes } from '../../../errors/customError';
 const { expect } = chai;
 
 describe('Car Model - \'/cars\'', () => {
@@ -13,7 +12,7 @@ describe('Car Model - \'/cars\'', () => {
     sinon.stub(Model, 'create').resolves(carMockWithId);
     sinon.stub(Model, 'find').resolves([carMockWithId]);
     sinon.stub(Model, 'findById').resolves(carMockWithId);
-    sinon.stub(Model, 'findByIdAndUpdate').resolves(carMockWithId);
+    sinon.stub(Model, 'findByIdAndUpdate').resolves(updatedCarMockWithId);
     sinon.stub(Model, 'findByIdAndDelete').resolves(carMockWithId);
   });
 
